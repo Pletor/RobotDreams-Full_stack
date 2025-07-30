@@ -1,0 +1,26 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "Playground pro Full-stack cvičení",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pletor/RobotDreams-Full_stack"
+  },
+  "bugs": {
+    "url": "https://github.com/Pletor/RobotDreams-Full_stack/issues"
+  },
+  "author": "Martin Hejl <martin.hejl@yahoo.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^9.31.0",
+    "@stylistic/eslint-plugin": "^1.8.1",
+    "eslint": "^9.31.0"
+  }
+}
