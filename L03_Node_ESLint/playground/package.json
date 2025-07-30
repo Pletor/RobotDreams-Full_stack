@@ -1,0 +1,22 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "Praktické cvičení – Lekce 3: Nastavení Node.js projektu, ESLint a základní skripty",
+  "author": "Tvé jméno",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pletor/RobotDreams-Full_stack"
+  },
+  "bugs": {
+    "url": "https://github.com/Pletor/RobotDreams-Full_stack/issues"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.32.0",
+    "@stylistic/eslint-plugin": "^5.2.2",
+    "eslint": "^9.32.0"
+  }
+}
