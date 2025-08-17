@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabulka a formulář</title>
+</head>
+<body>
+    <table id="data">
+        <caption>Tabulka s daty</caption>
+        
+        <thead>
+            <tr>
+                <th>Jméno:</th>
+                <th>Příjmení:</th>
+                <th>E-mail:</th>
+                <th>Telefon</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="4">Celkem kontaktů: <span id="contactCount">0</span></td>
+            </tr>
+        </tfoot>
+    </table>
+       
+        <h2>Formulář na vyplnění tabulky: </h2>
+
+    <form>
+        <label for="first_name">Jméno:</label>
+        <input id="first_name" type="text" name="first_name" required/>
+
+        <label for="last_name">Příjmení:</label>
+        <input id="last_name" type="text" name="last_name" required/>
+
+        <label for="email">E-mail:</label>
+        <input id="email" type="email" name="email" required/>
+
+        <label for="phone">Telefon:</label>
+        <input id="phone" type="tel" name="phone" required/>
+
+        <button type="submit" onclick="addRow()">Přidej řádek</button>
+
+    </form>
+    
+    <script>
+        const addRow = () => {
+            
+        
+        const table = document.getElementById("data").querySelector("tbody");
+        const newRow = table.insertRow(-1);
+
+        ["phone", "email", "last_name", "first_name"].forEach((fieldName) => {
+            const newValue = document.getElementById(fieldName).value;
+            const newCell = newRow.insertCell(0);
+            let newText = document.createTextNode(newValue);
+            newCell.appendChild(newText);
+        });
+       
+        const tbody = document.querySelector("tbody");
+        const contactCount = tbody.rows.length;
+        document.getElementById("contactCount").textContent = contactCount;
+
+        const form = document.querySelector("form");
+        form.reset();
+        };
+        
+    </script>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;    
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        table {
+            width: 50%;
+            margin-bottom: 150px;
+            background-color: #f9f9f9;
+            border-collapse: separate;  
+            border-spacing: 0 10px;
+            box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        thead th {
+            text-align: center;
+            
+        }
+
+        tbody td {
+            text-align: center;
+            
+        }
+
+       
+        tfoot td {
+        text-align: center;
+        font-weight: bold; 
+        padding-top: 20px;     
+        }
+
+        
+
+        caption {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 450px;
+            padding: 20px;
+            box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</body>
+</html>
