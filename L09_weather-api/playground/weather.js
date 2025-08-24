@@ -42,12 +42,49 @@ const splitCities = (text) => {
 const findGPS = async (city) => {
     const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=cs`;
     const response = await fetch(url);
+    
     const data = await response.json();
     if (data.results.length === 0) {
         throw new Error(`Město "${city}" nebylo nalezeno.`);
     }
     return data.results[0];
 };
+/*     try {
+        const response = await fetch(url);
+        
+        // Kontrola HTTP status kódu
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status} pro město "${city}"`);
+        }
+        
+        const data = await response.json();
+        
+        // Kontrola, zda results existuje a je to pole
+        if (!data.results || !Array.isArray(data.results)) {
+            throw new Error(`Neplatná odpověď API pro město "${city}"`);
+        }
+        
+        // Kontrola, zda bylo město nalezeno
+        if (data.results.length === 0) {
+            throw new Error(`Město "${city}" nebylo nalezeno`);
+        }
+        
+        // Kontrola, zda má výsledek potřebné souřadnice
+        const result = data.results[0];
+        if (!result.latitude || !result.longitude) {
+            throw new Error(`Chybí souřadnice pro město "${city}"`);
+        }
+        
+        return {
+            ...result,
+            originalCityName: city // Uchováme původní název pro případ chyby
+        };
+    } catch (error) {
+        // Přeposlání chyby s kontextem
+        throw new Error(`Chyba při hledání GPS pro "${city}": ${error.message}`);
+    } */
+
+
 
 const getWeather = async (latitude, longitude) => {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=1`;
@@ -60,6 +97,41 @@ const getWeather = async (latitude, longitude) => {
         min: data.daily.temperature_2m_min[0],
         max: data.daily.temperature_2m_max[0]
     };
+   
+    /*   try {
+        const response = await fetch(url);
+        
+        // Kontrola HTTP status kódu
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Detailní kontrola struktury dat
+        if (!data.daily || 
+            !Array.isArray(data.daily.temperature_2m_min) || 
+            !Array.isArray(data.daily.temperature_2m_max) ||
+            data.daily.temperature_2m_min.length === 0 ||
+            data.daily.temperature_2m_max.length === 0) {
+            throw new Error('Neplatná struktura dat o počasí');
+        }
+        
+        return {
+            name: name || originalCityName,
+            min: data.daily.temperature_2m_min[0],
+            max: data.daily.temperature_2m_max[0],
+            success: true
+        };
+    } catch (error) {
+        // Vrátíme objekt s chybou místo vyhození výjimky
+        return {
+            name: name || originalCityName,
+            error: error.message,
+            success: false
+        };
+    }
+};*/
 };
 
 const showResults = (results) => {
